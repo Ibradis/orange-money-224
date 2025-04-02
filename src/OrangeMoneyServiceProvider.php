@@ -1,5 +1,5 @@
 <?php
-namespace Ibrahima\OrangeMoney;
+namespace ibradis\OrangeMoney;
 
 use Illuminate\Support\ServiceProvider;
 
