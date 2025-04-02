@@ -1,74 +1,79 @@
-# orange-money-224
+# Orange Money Laravel Package
 
-Ce package permet d'intégrer le paiement via Orange Money Web Payment API dans une application Laravel.
+Ce package Laravel permet d'intégrer le service de paiement Orange Money Web Payment API (Sandbox) dans votre application.
 
-## 📌 Installation
+## Installation
 
-### 1. Installer via Composer
-Ajoutez le dépôt dans votre fichier `composer.json` :
+Vous pouvez installer ce package via Composer :
+
+```sh
+composer require ibradis/orange-money-224
+```
+
+Si vous utilisez une installation manuelle dans `vendor`, ajoutez cette ligne dans `composer.json` de votre projet :
 
 ```json
 "repositories": [
     {
-        "type": "vcs",
-        "url": "https://github.com/Ibradis/orange-money-224"
+        "type": "path",
+        "url": "vendor/ibradis/orange-money-224"
     }
-],
-"require": {
-    "ibradis/orange-money-224": "dev-main"
-}
+]
 ```
 
-Puis exécutez :
-```bash
-composer update
+Ensuite, exécutez :
+
+```sh
+composer require ibradis/orange-money
 ```
 
-### 2. Enregistrer le Service Provider
-Ajoutez cette ligne dans `config/app.php` :
+## Configuration
 
-```php
-'providers' => [
-    ibradis\OrangeMoney\OrangeMoneyServiceProvider::class,
-],
+Publiez la configuration :
+
+```sh
+php artisan vendor:publish --provider="ibradis\OrangeMoney\OrangeMoneyServiceProvider"
 ```
 
-### 3. Publier la configuration
+Puis, ajoutez vos informations Orange Money dans le fichier `.env` :
 
-```bash
-php artisan vendor:publish --tag=orange-money
-```
-
-Cela va créer un fichier `config/orange_money.php`.
-
-### 4. Configurer les variables d'environnement
-Ajoutez ces lignes à votre fichier `.env` :
-
-```env
+```ini
 ORANGE_CLIENT_ID=your_client_id
 ORANGE_CLIENT_SECRET=your_client_secret
 ORANGE_MERCHANT_KEY=your_merchant_key
 ORANGE_RETURN_URL=https://yourapp.com/success
 ORANGE_CANCEL_URL=https://yourapp.com/cancel
-ORANGE_NOTIF_URL=https://yourapp.com/notify
+ORANGE_NOTIF_URL=https://yourapp.com/notification
 ```
 
-## 🚀 Utilisation
+## Utilisation
 
-### 1. Effectuer un paiement
+### Initialisation du service
+
+Dans votre contrôleur ou service :
 
 ```php
-use ibradis\OrangeMoney\OrangeMoney;
+use Ibrahima\OrangeMoney\OrangeMoney;
 
 $orangeMoney = new OrangeMoney();
-$response = $orangeMoney->createPayment('ORDER123', 1000, 'Ref123');
-
-dd($response);
 ```
 
-### 2. Vérifier l'état d'un paiement (à implémenter)
-Bientôt disponible !
+### Créer un paiement
 
-## 📜 Licence
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus d’informations.
+```php
+$orderId = uniqid();
+$amount = 1000;
+$reference = 'Commande123';
 
+$response = $orangeMoney->createPayment($orderId, $amount, $reference);
+```
+
+### Obtenir un token d'accès
+
+```php
+$token = $orangeMoney->getAccessToken();
+```
+
+## Licence
+
+Ce projet est sous licence MIT.
