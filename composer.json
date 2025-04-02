@@ -1,0 +1,14 @@
+{
+    "name": "ibradis/orange-money",
+    "description": "A Laravel package for Orange Money Web Payment API (Sandbox)",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "ibradis\\OrangeMoney\\": "src/"
+        }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "^7.0",
+        "php": "^8.1"
+    }
+}
