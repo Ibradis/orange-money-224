@@ -1,16 +1,33 @@
 {
     "name": "ibradis/orange-money",
-    "description": "A Laravel package for Orange Money Web Payment API (Sandbox)",
+    "description": "Un package Laravel pour intégrer l'API Orange Money Web Payment.",
     "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ibrahima",
+            "email": "soryd70@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "^7.0"
+    },
     "autoload": {
         "psr-4": {
-            "ibradis\\OrangeMoney\\": "src/"
+            "Ibradis\\OrangeMoney\\": "src/"
         }
     },
-    "require": {
-        "guzzlehttp/guzzle": "^7.0",
-        "php": "^8.1",
-        "minimum-stability": "dev",
-        "prefer-stable": true
-    }
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ibradis\\OrangeMoney\\OrangeMoneyServiceProvider"
+            ],
+            "aliases": {
+                "OrangeMoney": "Ibradis\\OrangeMoney\\Facades\\OrangeMoney"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
